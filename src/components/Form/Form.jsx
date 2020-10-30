@@ -15,6 +15,9 @@ const Form = ({handleInputChange, handleSubmit}) => {
   );
 };
 
-Form.propTypes = {};
+Form.propTypes = {
+    handleInputChange: PropTypes.func,
+    handleSubmit: PropTypes.func
+};
 
 export default Form;

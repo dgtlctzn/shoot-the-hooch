@@ -12,14 +12,13 @@ const Home = () => {
         console.log(location)
         API.getWeather(location).then(({data})=> {
             console.log(data);
-            
+
         })
     }
 
     const handleInputChange = (e) => {
         setLocation(e.target.value);
     }
-
 
     return (
         <div className="container">
