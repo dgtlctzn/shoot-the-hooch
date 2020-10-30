@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Form = ({location, handleInputChange, handleSubmit}) => {
+const Form = ({handleInputChange, handleSubmit}) => {
   return (
-    <form onSubmit={(e)=> {handleSubmit(e, location)}}>
+    <form onSubmit={handleSubmit}>
       <select className="form-control form-control-lg" onChange={handleInputChange}>
         <option value="North Atlanta">North Atlanta</option>
         <option value="Atlanta">Atlanta</option>

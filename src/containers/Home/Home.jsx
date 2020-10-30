@@ -6,12 +6,13 @@ const Home = () => {
 
     const [location, setLocation] = useState("");
 
-    const handleSubmit = (e, city) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(city)
-        API.getWeather(city).then(({data})=> {
+        console.log(location)
+        API.getWeather(location).then(({data})=> {
             console.log(data);
+            
         })
     }
 
@@ -23,7 +24,7 @@ const Home = () => {
     return (
         <div className="container">
             <h1>Home</h1>
-            <Form location={location} handleInputChange={handleInputChange} handleSubmit={handleSubmit}/>
+            <Form handleInputChange={handleInputChange} handleSubmit={handleSubmit}/>
         </div>
     );
 };
