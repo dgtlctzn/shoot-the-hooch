@@ -1,9 +1,16 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
+import Form from "../../components/Form/Form"
+import API from "../../utils/API"
 
 const Home = () => {
+
+
+
+
     return (
-        <div>
-            
+        <div class="container">
+            <h1>Home</h1>
+            <Form />
         </div>
     );
 };
