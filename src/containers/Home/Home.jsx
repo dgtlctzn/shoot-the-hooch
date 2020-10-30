@@ -4,7 +4,7 @@ import API from "../../utils/API"
 
 const Home = () => {
 
-    const [location, setLocation] = useState("");
+    const [location, setLocation] = useState("North Atlanta");
 
     const handleSubmit = (e) => {
         e.preventDefault();
