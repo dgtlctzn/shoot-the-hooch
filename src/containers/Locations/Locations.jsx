@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import Weather from "../../components/Weather/Weather"
 
 const Locations = () => {
   let history = useHistory();
@@ -9,7 +10,11 @@ const Locations = () => {
   return (
     <div>
       <h1>Location</h1>
-      <p>{weather.list[0].main.temp}</p>
+      <ul>
+        {weather.list.map(item => (
+          <Weather key={item.dt} weather={item}/>
+        ))}
+      </ul>
     </div>
   );
 };
