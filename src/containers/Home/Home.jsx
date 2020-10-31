@@ -1,41 +1,37 @@
-import {useState, useEffect} from 'react';
-import Form from "../../components/Form/Form"
-import API from "../../utils/API"
-import {useHistory} from "react-router-dom";
-import "./Home.css"
+import { useState, useEffect } from "react";
+import Form from "../../components/Form/Form";
+import API from "../../utils/API";
+import { useHistory } from "react-router-dom";
+import "./Home.css";
 
 const Home = () => {
+  const [latitude, setLatitude] = useState(33.87);
+  const [longitude, setLongitude] = useState(-84.34);
+  const [location, setLocation] = useState("northatlanta");
+  let history = useHistory();
 
-    const [latitude, setLatitude] = useState(33.87);
-    const [longitude, setLongitude] = useState(-84.34);
-    const [location, setLocation] = useState("northatlanta");
-    let history = useHistory();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    // console.log(location)
+    API.getWeather(latitude, longitude).then(({ data }) => {
+      history.push(`/location/${location}`, data);
+    });
+  };
 
-        // console.log(location)
-        API.getWeather(latitude, longitude).then(({data})=> {
-            history.push(`/location/${location}`, data)
-        })
-    }
+  const handleInputChange = (e) => {
+    const latAndLong = e.target.value.split(" ");
+    setLatitude(latAndLong[0]);
+    setLongitude(latAndLong[1]);
+    setLocation(latAndLong[2]);
+  };
 
-    const handleInputChange = (e) => {
-
-        const latAndLong = e.target.value.split(" ")
-        setLatitude(latAndLong[0]);
-        setLongitude(latAndLong[1]);
-        setLocation(latAndLong[2]);
-    }
-
-    return (
-        <div id="home">
-            <div id="home" className="container">
-            <h1>Home</h1>
-            <Form handleInputChange={handleInputChange} handleSubmit={handleSubmit}/>
-        </div>
-        </div>
-    );
+  return (
+    <div id="home" className="container">
+      <h1>Home</h1>
+      <Form handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+    </div>
+  );
 };
 
 export default Home;
