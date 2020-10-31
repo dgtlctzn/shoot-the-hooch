@@ -13,9 +13,7 @@ const Home = () => {
 
         console.log(location)
         API.getWeather(location).then(({data})=> {
-            console.log(data);
-            history.push(`/location/${data.city.id}`)
-
+            history.push(`/location/${data.city.id}`, data)
         })
     }
 
