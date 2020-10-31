@@ -11,7 +11,7 @@ const Locations = () => {
     <div>
       <h1>Location</h1>
       <ul>
-        {weather.list.map(item => (
+        {weather.hourly.map(item => (
           <Weather key={item.dt} weather={item}/>
         ))}
       </ul>
