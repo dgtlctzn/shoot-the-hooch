@@ -1,10 +1,12 @@
 import {useState, useEffect} from 'react';
 import Form from "../../components/Form/Form"
 import API from "../../utils/API"
+import {useHistory} from "react-router-dom";
 
 const Home = () => {
 
     const [location, setLocation] = useState("North Atlanta");
+    let history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -12,6 +14,7 @@ const Home = () => {
         console.log(location)
         API.getWeather(location).then(({data})=> {
             console.log(data);
+            history.push(`/location/${data.city.id}`)
 
         })
     }
