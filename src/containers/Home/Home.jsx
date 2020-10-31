@@ -8,14 +8,17 @@ const Home = () => {
   const [latitude, setLatitude] = useState(33.87);
   const [longitude, setLongitude] = useState(-84.34);
   const [location, setLocation] = useState("northatlanta");
+  const [site, setSite] = useState("02335815");
   let history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // console.log(location)
-    API.getWeather(latitude, longitude).then(({ data }) => {
-      history.push(`/location/${location}`, data);
+    API.getWeather(latitude, longitude).then((weatherResponse) => {
+      API.getWaterLevel(site).then((waterLevelResponse) => {
+        history.push(`/location/${location}`, {...weatherResponse.data, ...waterLevelResponse.data});
+      })
     });
   };
 
@@ -24,6 +27,7 @@ const Home = () => {
     setLatitude(latAndLong[0]);
     setLongitude(latAndLong[1]);
     setLocation(latAndLong[2]);
+    setSite(latAndLong[3]);
   };
 
   return (

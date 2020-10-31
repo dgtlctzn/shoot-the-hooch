@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import Weather from "../../components/Weather/Weather";
 import moment from "moment";
-import "./Locations.css"
+import "./Locations.css";
 
 const Locations = () => {
   let history = useHistory();
@@ -11,6 +11,12 @@ const Locations = () => {
 
   const time = moment.unix(weather.current.dt).format("h:mm a");
   const temp = `${Math.round(weather.current.temp)}°F`;
+
+  const listLength = weather.value.timeSeries[1].values[0].value.length;
+  console.log(listLength);
+  const waterLevel = `${
+    weather.value.timeSeries[1].values[0].value[listLength - 1].value
+  } ft3/s`;
 
   return (
     <div className="container">
@@ -27,6 +33,13 @@ const Locations = () => {
               <Weather key={item.dt} weather={item} />
             ))}
           </ul>
+        </div>
+        <div className="col-sm-4">
+          <div className="row">
+            <div id="water-level" className="col-sm-12">
+              <p>{waterLevel}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
