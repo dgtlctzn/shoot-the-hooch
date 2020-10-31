@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import Form from "../../components/Form/Form"
 import API from "../../utils/API"
 import {useHistory} from "react-router-dom";
+import "./Home.css"
 
 const Home = () => {
 
@@ -28,9 +29,11 @@ const Home = () => {
     }
 
     return (
-        <div className="container">
+        <div id="home">
+            <div id="home" className="container">
             <h1>Home</h1>
             <Form handleInputChange={handleInputChange} handleSubmit={handleSubmit}/>
+        </div>
         </div>
     );
 };
