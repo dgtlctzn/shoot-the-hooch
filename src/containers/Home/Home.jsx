@@ -5,29 +5,38 @@ import { useHistory } from "react-router-dom";
 import "./Home.css";
 
 const Home = () => {
-  const [latitude, setLatitude] = useState(33.87);
-  const [longitude, setLongitude] = useState(-84.34);
-  const [location, setLocation] = useState("northatlanta");
-  const [site, setSite] = useState("02335815");
+  const [riverLoc, setRiverLoc] = useState({
+    latitude: 33.87,
+    longitude: -84.34,
+    location: "northatlanta",
+    site: "02335815",
+  });
+
   let history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // console.log(location)
-    API.getWeather(latitude, longitude).then((weatherResponse) => {
-      API.getWaterLevel(site).then((waterLevelResponse) => {
-        history.push(`/location/${location}`, {...weatherResponse.data, ...waterLevelResponse.data});
-      })
-    });
+    API.getWeather(riverLoc.latitude, riverLoc.longitude).then(
+      (weatherResponse) => {
+        API.getWaterLevel(riverLoc.site).then((waterLevelResponse) => {
+          history.push(`/location/${riverLoc.location}`, {
+            ...weatherResponse.data,
+            ...waterLevelResponse.data,
+          });
+        });
+      }
+    );
   };
 
   const handleInputChange = (e) => {
-    const latAndLong = e.target.value.split(" ");
-    setLatitude(latAndLong[0]);
-    setLongitude(latAndLong[1]);
-    setLocation(latAndLong[2]);
-    setSite(latAndLong[3]);
+    const locInfo = e.target.value.split(" ");
+    setRiverLoc({
+      latitude: locInfo[0],
+      longitude: locInfo[1],
+      location: locInfo[2],
+      site: locInfo[3],
+    });
   };
 
   return (
