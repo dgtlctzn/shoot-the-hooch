@@ -1,16 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import Form from "../../components/Form/Form";
 import API from "../../utils/API";
 import { useHistory } from "react-router-dom";
 import "./Home.css";
+import RiverLocContext from "../../utils/RiverLocContext";
 
 const Home = () => {
-  const [riverLoc, setRiverLoc] = useState({
-    latitude: 33.87,
-    longitude: -84.34,
-    location: "northatlanta",
-    site: "02335815",
-  });
+  const { riverLoc, setRiverLoc, setWeather, setWaterLevel } = useContext(
+    RiverLocContext
+  );
 
   let history = useHistory();
 
@@ -20,10 +18,9 @@ const Home = () => {
     API.getWeather(riverLoc.latitude, riverLoc.longitude).then(
       (weatherResponse) => {
         API.getWaterLevel(riverLoc.site).then((waterLevelResponse) => {
-          history.push(`/location/${riverLoc.location}`, {
-            ...weatherResponse.data,
-            ...waterLevelResponse.data,
-          });
+          setWeather(weatherResponse.data);
+          setWaterLevel(waterLevelResponse.data);
+          history.push(`/location/${riverLoc.location}`);
         });
       }
     );

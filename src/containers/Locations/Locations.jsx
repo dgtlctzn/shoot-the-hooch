@@ -1,19 +1,19 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import Weather from "../../components/Weather/Weather";
 import moment from "moment";
 import "./Locations.css";
+import RiverLocContext from "../../utils/RiverLocContext";
 
 const Locations = () => {
-  let history = useHistory();
-  const weather = history.location.state;
+  const { weather, waterLevel } = useContext(RiverLocContext);
 
   const time = moment.unix(weather.current.dt).format("h:mm a");
   const temp = `${Math.round(weather.current.temp)}°F`;
 
-  const waterLevels = weather.value.timeSeries[1].values[0].value;
+  const waterLevels = waterLevel.value.timeSeries[1].values[0].value;
 
-  // searches API response for lowest/highest water levels and calculates average 
+  // searches API response for lowest/highest water levels and calculates average
   let min = Infinity;
   let max = -Infinity;
   let avg = 0;
@@ -50,12 +50,7 @@ const Locations = () => {
       // fills canvas with water based on current level
       const ctx = canvasRef.current.getContext("2d");
       ctx.fillStyle = "blue";
-      ctx.fillRect(
-        0,
-        0,
-        WIDTH,
-        Math.round(HEIGHT * percentFill)
-      );
+      ctx.fillRect(0, 0, WIDTH, Math.round(HEIGHT * percentFill));
 
       // adds line to canvas for average water level
       ctx.strokeStyle = "red";
@@ -76,9 +71,11 @@ const Locations = () => {
               <p>{temp}</p>
               <p>{weather.current.weather[0].description}</p>
             </li>
-            {weather.hourly.filter((item, index) => index < 6).map((item) => (
-              <Weather key={item.dt} weather={item} />
-            ))}
+            {weather.hourly
+              .filter((item, index) => index < 6)
+              .map((item) => (
+                <Weather key={item.dt} weather={item} />
+              ))}
           </ul>
         </div>
         <div className="col-sm-2">
