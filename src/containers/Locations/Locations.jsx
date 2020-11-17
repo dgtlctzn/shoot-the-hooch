@@ -9,6 +9,8 @@ import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 const Locations = () => {
   const { weather, waterLevel } = useContext(RiverLocContext);
 
+  const iconClass = weather.current.weather[0].main;
+
   const time = moment.unix(weather.current.dt).format("h:mm a");
   const temp = `${Math.round(weather.current.temp)}°F`;
 
@@ -36,24 +38,6 @@ const Locations = () => {
   const maxWaterLevel = `${max} ft³/s`;
 
   const canvasRef = useRef(null);
-
-  // changes fontawesome icon based on weather condition
-  const displayWeatherIcon = (weatherEvent) => {
-    switch (weatherEvent) {
-      case "Clouds":
-        return "fas fa-cloud";
-      case "Rain":
-        return "fas fa-cloud-rain";
-      case "Smoke" || "Haze" || "Fog" || "Mist":
-        return "fas fa-smog";
-      case "Thunderstorm":
-        return "fas fa-bolt";
-      case "Snow":
-        return "fas fa-snowflake";
-      default:
-        return "fas fa-sun";
-    }
-  };
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -99,15 +83,11 @@ const Locations = () => {
           <CurrentWeather
             time={time}
             temp={temp}
+            iconClass={iconClass}
             description={weather.current.weather[0].description}
             className="current"
           />
           <ul>
-            {/* <li className="list-group-item">
-              <p>{time}</p>
-              <p>{temp}</p>
-              <p>{weather.current.weather[0].description}</p>
-            </li> */}
             {weather.hourly
               .filter((item, index) => index < 6)
               .map((item) => (
@@ -115,16 +95,6 @@ const Locations = () => {
               ))}
           </ul>
         </div>
-        {/* <div className="col-sm-2">
-          <div className="row">
-            <canvas ref={labelRef} id="water-level" className="col-sm-12">
-              <p>Current Water Flow: {currentWaterLevel} ft³/s</p>
-              <p>Minimum Water Flow: {minWaterLevel}</p>
-              <p>Maximum Water Flow: {maxWaterLevel}</p>
-              <p>Average Water FLow: {avgWaterLevel}</p>
-            </canvas>
-          </div>
-        </div> */}
         <div className="col-sm-4">
           <div className="row">
             <div className="col-sm-12">
