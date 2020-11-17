@@ -35,6 +35,7 @@ const Locations = () => {
   const maxWaterLevel = `${max} ft³/s`;
 
   const canvasRef = useRef(null);
+  const labelRef = useRef(null);
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -44,12 +45,12 @@ const Locations = () => {
 
       // conversion of fixed values to percentage for canvas translation
       const range = max - min;
-      const percentFill = currentWaterLevel / range;
-      const percentAvg = avg / range;
+      const percentFill = 1 - (currentWaterLevel / range);
+      const percentAvg = 1 - (avg / range);
 
       // fills canvas with water based on current level
       const ctx = canvasRef.current.getContext("2d");
-      ctx.fillStyle = "blue";
+      ctx.fillStyle = "rgb(194, 231, 255)";
       ctx.fillRect(0, 0, WIDTH, Math.round(HEIGHT * percentFill));
 
       // adds line to canvas for average water level
@@ -57,6 +58,14 @@ const Locations = () => {
       ctx.moveTo(0, HEIGHT * percentAvg);
       ctx.lineTo(WIDTH, HEIGHT * percentAvg);
       ctx.stroke();
+
+      // adds text to canvas for each value
+      ctx.font = "20px Arial";
+      ctx.fillStyle = "black";
+      ctx.fillText(avgWaterLevel, WIDTH - 100, HEIGHT * (percentAvg));
+      ctx.fillText(currentWaterLevel + " ft³/s", 10, Math.round(HEIGHT * (percentFill)));
+      ctx.fillText(maxWaterLevel, WIDTH / 2.5, 20);
+      ctx.fillText(minWaterLevel, WIDTH / 2.5, HEIGHT * .95);
     }
   }, []);
 
@@ -78,20 +87,20 @@ const Locations = () => {
               ))}
           </ul>
         </div>
-        <div className="col-sm-2">
+        {/* <div className="col-sm-2">
           <div className="row">
-            <div id="water-level" className="col-sm-12">
+            <canvas ref={labelRef} id="water-level" className="col-sm-12">
               <p>Current Water Flow: {currentWaterLevel} ft³/s</p>
               <p>Minimum Water Flow: {minWaterLevel}</p>
               <p>Maximum Water Flow: {maxWaterLevel}</p>
               <p>Average Water FLow: {avgWaterLevel}</p>
-            </div>
+            </canvas>
           </div>
-        </div>
+        </div> */}
         <div className="col-sm-4">
           <div className="row">
             <div className="col-sm-12">
-              <canvas ref={canvasRef} />
+              <canvas className="canvas" ref={canvasRef} />
             </div>
           </div>
         </div>

@@ -1,15 +1,19 @@
 #water-level {
     background-color: white;
-}
-
-canvas {
     height: 600px;
     width: 300px;
+}
+
+.canvas {
+    height: 400px;
+    width: 500px;
     border-radius: 20px;
-    background-color: rgb(194, 231, 255);
-    -webkit-transform: rotate(180deg);
+    background-color: blue;
+    /* -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
     -ms-transform: rotate(180deg);
     -o-transform: rotate(180deg);
-    transform: rotate(180deg);
+    transform: rotate(180deg); */
+    /* font-size: 40px; */
+    /* color: white; */
 }
