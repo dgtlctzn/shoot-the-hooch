@@ -8,9 +8,8 @@ import WaterLevel from "../../components/WaterLevel/WaterLevel";
 
 const Locations = () => {
   const { weather, waterLevel } = useContext(RiverLocContext);
-  console.log(waterLevel);
   const location = waterLevel.value.timeSeries[0].sourceInfo.siteName;
-  console.log(location);
+  const {latitude, longitude} = waterLevel.value.timeSeries[0].sourceInfo.geoLocation.geogLocation;
 
   const iconClass = weather.current.weather[0].main;
 
@@ -100,6 +99,7 @@ const Locations = () => {
       // ctx.fillText("Min", WIDTH / 2.5, HEIGHT * 0.95);
     }
   }, []);
+  console.log(process.env.REACT_APP_GOOGLE_API_KEY)
 
   return (
     <div className="container">
@@ -133,19 +133,29 @@ const Locations = () => {
       </div>
       <div className="row">
         <div className="col-sm-12 hourly">
-          {weather.hourly.map(
-            (item, index) => {
-              if (index < 6 && index > 0) {
-                return (
-                  <HourlyWeather
-                    key={item.dt}
-                    weather={item}
-                    displayWeatherIcon={displayWeatherIcon}
-                  />
-                );
-              }
+          {weather.hourly.map((item, index) => {
+            if (index < 6 && index > 0) {
+              return (
+                <HourlyWeather
+                  key={item.dt}
+                  weather={item}
+                  displayWeatherIcon={displayWeatherIcon}
+                />
+              );
             }
-          )}
+          })}
+        </div>
+      </div>
+      <div>
+        <div>
+          <iframe
+            width="600"
+            height="450"
+            frameBorder="0"
+            style={{border:1}}
+            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${location}&center=${latitude},${longitude}&zoom=15`}
+            allowFullScreen
+          ></iframe>
         </div>
       </div>
     </div>
