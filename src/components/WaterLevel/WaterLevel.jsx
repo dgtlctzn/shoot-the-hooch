@@ -10,9 +10,9 @@ const WaterLevel = ({
   return (
     <div className="water-level">
       <p>Current: {currentWaterLevel} ft³/s</p>
-      <p>Average: {avgWaterLevel}</p>
-      <p>Max: {maxWaterLevel}</p>
-      <p>Min: {minWaterLevel}</p>
+      <p>Average: {Math.round(avgWaterLevel)} ft³/s</p>
+      <p>Max: {maxWaterLevel} ft³/s</p>
+      <p>Min: {minWaterLevel} ft³/s</p>
     </div>
   );
 };

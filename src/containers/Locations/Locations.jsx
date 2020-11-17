@@ -9,7 +9,10 @@ import WaterLevel from "../../components/WaterLevel/WaterLevel";
 const Locations = () => {
   const { weather, waterLevel } = useContext(RiverLocContext);
   const location = waterLevel.value.timeSeries[0].sourceInfo.siteName;
-  const {latitude, longitude} = waterLevel.value.timeSeries[0].sourceInfo.geoLocation.geogLocation;
+  const {
+    latitude,
+    longitude,
+  } = waterLevel.value.timeSeries[0].sourceInfo.geoLocation.geogLocation;
 
   const iconClass = weather.current.weather[0].main;
 
@@ -19,25 +22,26 @@ const Locations = () => {
   const waterLevels = waterLevel.value.timeSeries[1].values[0].value;
 
   // searches API response for lowest/highest water levels and calculates average
-  let min = Infinity;
-  let max = -Infinity;
-  let avg = 0;
-  for (const level of waterLevels) {
-    const levelVal = parseInt(level.value);
-    if (levelVal > max) {
-      max = levelVal;
+  const findWaterLevels = (levels) => {
+    let min = Infinity;
+    let max = -Infinity;
+    let avg = 0;
+    for (const level of levels) {
+      const levelVal = parseInt(level.value);
+      if (levelVal > max) {
+        max = levelVal;
+      }
+      if (levelVal < min) {
+        min = levelVal;
+      }
+      avg += levelVal;
     }
-    if (levelVal < min) {
-      min = levelVal;
-    }
-    avg += levelVal;
-  }
-  avg /= waterLevels.length;
+    avg /= waterLevels.length;
+    return { avg, max, min };
+  };
 
+  const { avg, max, min } = findWaterLevels(waterLevels);
   const currentWaterLevel = waterLevels[waterLevels.length - 1].value;
-  const avgWaterLevel = `${Math.round(avg)} ft³/s`;
-  const minWaterLevel = `${min} ft³/s`;
-  const maxWaterLevel = `${max} ft³/s`;
 
   const canvasRef = useRef(null);
 
@@ -59,12 +63,12 @@ const Locations = () => {
     }
   };
 
+  // removes all caps in title
   const titleFormat = (title) => {
     const loc = title.split(",")[0];
     return loc
-      .toLowerCase()
       .split(" ")
-      .map((item) => item[0].toUpperCase() + item.slice(1))
+      .map((item) => item[0] + item.slice(1).toLowerCase())
       .join(" ");
   };
 
@@ -99,7 +103,7 @@ const Locations = () => {
       // ctx.fillText("Min", WIDTH / 2.5, HEIGHT * 0.95);
     }
   }, []);
-  console.log(process.env.REACT_APP_GOOGLE_API_KEY)
+  console.log(process.env.REACT_APP_GOOGLE_API_KEY);
 
   return (
     <div className="container">
@@ -118,9 +122,9 @@ const Locations = () => {
         <div className="col-sm-2">
           <WaterLevel
             currentWaterLevel={currentWaterLevel}
-            maxWaterLevel={maxWaterLevel}
-            minWaterLevel={minWaterLevel}
-            avgWaterLevel={avgWaterLevel}
+            maxWaterLevel={max}
+            minWaterLevel={min}
+            avgWaterLevel={avg}
           />
         </div>
         <div className="col-sm-4">
@@ -152,7 +156,7 @@ const Locations = () => {
             width="600"
             height="450"
             frameBorder="0"
-            style={{border:1}}
+            style={{ border: 1 }}
             src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${location}&center=${latitude},${longitude}&zoom=15`}
             allowFullScreen
           ></iframe>
