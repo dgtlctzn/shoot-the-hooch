@@ -2,3 +2,15 @@ body {
     background-image: url(./img/Chattahoochee-film-min.jpg);
     background-size: cover;
 }
+
+.title {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 100px;
+    line-height: .6;
+    color: seashell;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+#title {
+    margin: 30px;
+}

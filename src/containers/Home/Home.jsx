@@ -38,8 +38,20 @@ const Home = () => {
 
   return (
     <div id="home" className="container">
-      <h1>Home</h1>
-      <Form handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+      <div id="title" className="text-center">
+        <p className="title">SHOOT</p>
+        <p className="title">THE</p>
+        <p className="title">HOOCH!</p>
+      </div>
+      <div className="row">
+        <div className="col-sm-4"></div>
+        <div className="col-sm-4">
+          <Form
+            handleInputChange={handleInputChange}
+            handleSubmit={handleSubmit}
+          />
+        </div>
+      </div>
     </div>
   );
 };
