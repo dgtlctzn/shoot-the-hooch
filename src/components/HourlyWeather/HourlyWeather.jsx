@@ -9,11 +9,11 @@ const HourlyWeather = ({ weather, displayWeatherIcon }) => {
   return (
     <div className="hourly-card">
       <p>
-        <i class="far fa-clock" />
+        <i className="far fa-clock" />
         {time}
       </p>
       <p>
-        <i class="fas fa-thermometer-empty" />
+        <i className="fas fa-thermometer-empty" />
         {temp}
       </p>
       <p>

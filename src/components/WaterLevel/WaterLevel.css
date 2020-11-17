@@ -1,0 +1,8 @@
+.water-level {
+    background-color: white;
+    height: 400px;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}

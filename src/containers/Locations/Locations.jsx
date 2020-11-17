@@ -1,14 +1,16 @@
 import React, { useRef, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import Weather from "../../components/Weather/Weather";
 import moment from "moment";
 import "./Locations.css";
 import RiverLocContext from "../../utils/RiverLocContext";
 import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 import HourlyWeather from "../../components/HourlyWeather/HourlyWeather";
+import WaterLevel from "../../components/WaterLevel/WaterLevel";
 
 const Locations = () => {
   const { weather, waterLevel } = useContext(RiverLocContext);
+  console.log(waterLevel);
+  const location = waterLevel.value.timeSeries[0].sourceInfo.siteName;
+  console.log(location);
 
   const iconClass = weather.current.weather[0].main;
 
@@ -58,6 +60,15 @@ const Locations = () => {
     }
   };
 
+  const titleFormat = (title) => {
+    const loc = title.split(",")[0];
+    return loc
+      .toLowerCase()
+      .split(" ")
+      .map((item) => item[0].toUpperCase() + item.slice(1))
+      .join(" ");
+  };
+
   useEffect(() => {
     if (canvasRef.current) {
       // size of html canvas
@@ -83,20 +94,16 @@ const Locations = () => {
       // adds text to canvas for each value
       ctx.font = "20px Arial";
       ctx.fillStyle = "black";
-      ctx.fillText(avgWaterLevel, WIDTH - 100, HEIGHT * percentAvg);
-      ctx.fillText(
-        currentWaterLevel + " ft³/s",
-        10,
-        Math.round(HEIGHT * percentFill)
-      );
-      ctx.fillText(maxWaterLevel, WIDTH / 2.5, 20);
-      ctx.fillText(minWaterLevel, WIDTH / 2.5, HEIGHT * 0.95);
+      ctx.fillText("Average", WIDTH - 100, HEIGHT * percentAvg);
+      ctx.fillText("Current", 10, Math.round(HEIGHT * percentFill));
+      // ctx.fillText("Max", WIDTH / 2.5, 20);
+      // ctx.fillText("Min", WIDTH / 2.5, HEIGHT * 0.95);
     }
   }, []);
 
   return (
     <div className="container">
-      <h1>Location</h1>
+      <h1>{titleFormat(location)}</h1>
       <div id="main-col" className="row">
         <div className="col-sm-4">
           <CurrentWeather
@@ -106,6 +113,14 @@ const Locations = () => {
             description={weather.current.weather[0].description}
             displayWeatherIcon={displayWeatherIcon}
             className="current"
+          />
+        </div>
+        <div className="col-sm-2">
+          <WaterLevel
+            currentWaterLevel={currentWaterLevel}
+            maxWaterLevel={maxWaterLevel}
+            minWaterLevel={minWaterLevel}
+            avgWaterLevel={avgWaterLevel}
           />
         </div>
         <div className="col-sm-4">
@@ -121,10 +136,15 @@ const Locations = () => {
           {weather.hourly.map(
             (item, index) => {
               if (index < 6 && index > 0) {
-                return <HourlyWeather key={item.dt} weather={item} displayWeatherIcon={displayWeatherIcon} />;
+                return (
+                  <HourlyWeather
+                    key={item.dt}
+                    weather={item}
+                    displayWeatherIcon={displayWeatherIcon}
+                  />
+                );
               }
             }
-            // <Weather key={item.dt} weather={item} />
           )}
         </div>
       </div>
