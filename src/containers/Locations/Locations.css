@@ -18,6 +18,10 @@
     /* color: white; */
 }
 
-#main-col {
+/* #main-col {
     background-color: white;
+} */
+
+.hourly {
+    display: inline-block;
 }

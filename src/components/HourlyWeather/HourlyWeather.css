@@ -1,12 +1,15 @@
-#current {
-    height: 400px;
+.hourly-card {
     background-color: white;
+    margin-right: 20px;
+    float: left;
+    width: 150px;
+    height: 200px;
     border-radius: 20px;
     border-style: solid;
     border-width: 1px;
     border-color: black;
 }
 
-.current-icon {
-    font-size: 150px;
+p {
+    margin: 15px;
 }

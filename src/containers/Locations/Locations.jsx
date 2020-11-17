@@ -5,6 +5,7 @@ import moment from "moment";
 import "./Locations.css";
 import RiverLocContext from "../../utils/RiverLocContext";
 import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
+import HourlyWeather from "../../components/HourlyWeather/HourlyWeather";
 
 const Locations = () => {
   const { weather, waterLevel } = useContext(RiverLocContext);
@@ -38,6 +39,24 @@ const Locations = () => {
   const maxWaterLevel = `${max} ft³/s`;
 
   const canvasRef = useRef(null);
+
+  // changes fontawesome icon based on weather condition
+  const displayWeatherIcon = (weatherEvent) => {
+    switch (weatherEvent) {
+      case "Clouds":
+        return "fas fa-cloud";
+      case "Rain":
+        return "fas fa-cloud-rain";
+      case "Smoke" || "Haze" || "Fog" || "Mist":
+        return "fas fa-smog";
+      case "Thunderstorm":
+        return "fas fa-bolt";
+      case "Snow":
+        return "fas fa-snowflake";
+      default:
+        return "fas fa-sun";
+    }
+  };
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -85,15 +104,9 @@ const Locations = () => {
             temp={temp}
             iconClass={iconClass}
             description={weather.current.weather[0].description}
+            displayWeatherIcon={displayWeatherIcon}
             className="current"
           />
-          <ul>
-            {weather.hourly
-              .filter((item, index) => index < 6)
-              .map((item) => (
-                <Weather key={item.dt} weather={item} />
-              ))}
-          </ul>
         </div>
         <div className="col-sm-4">
           <div className="row">
@@ -101,6 +114,18 @@ const Locations = () => {
               <canvas className="canvas" ref={canvasRef} />
             </div>
           </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-sm-12 hourly">
+          {weather.hourly.map(
+            (item, index) => {
+              if (index < 6 && index > 0) {
+                return <HourlyWeather key={item.dt} weather={item} displayWeatherIcon={displayWeatherIcon} />;
+              }
+            }
+            // <Weather key={item.dt} weather={item} />
+          )}
         </div>
       </div>
     </div>
