@@ -4,6 +4,7 @@ import Weather from "../../components/Weather/Weather";
 import moment from "moment";
 import "./Locations.css";
 import RiverLocContext from "../../utils/RiverLocContext";
+import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 
 const Locations = () => {
   const { weather, waterLevel } = useContext(RiverLocContext);
@@ -45,8 +46,8 @@ const Locations = () => {
 
       // conversion of fixed values to percentage for canvas translation
       const range = max - min;
-      const percentFill = 1 - (currentWaterLevel / range);
-      const percentAvg = 1 - (avg / range);
+      const percentFill = 1 - currentWaterLevel / range;
+      const percentAvg = 1 - avg / range;
 
       // fills canvas with water based on current level
       const ctx = canvasRef.current.getContext("2d");
@@ -62,24 +63,34 @@ const Locations = () => {
       // adds text to canvas for each value
       ctx.font = "20px Arial";
       ctx.fillStyle = "black";
-      ctx.fillText(avgWaterLevel, WIDTH - 100, HEIGHT * (percentAvg));
-      ctx.fillText(currentWaterLevel + " ft³/s", 10, Math.round(HEIGHT * (percentFill)));
+      ctx.fillText(avgWaterLevel, WIDTH - 100, HEIGHT * percentAvg);
+      ctx.fillText(
+        currentWaterLevel + " ft³/s",
+        10,
+        Math.round(HEIGHT * percentFill)
+      );
       ctx.fillText(maxWaterLevel, WIDTH / 2.5, 20);
-      ctx.fillText(minWaterLevel, WIDTH / 2.5, HEIGHT * .95);
+      ctx.fillText(minWaterLevel, WIDTH / 2.5, HEIGHT * 0.95);
     }
   }, []);
 
   return (
     <div className="container">
       <h1>Location</h1>
-      <div className="row">
+      <div id="main-col" className="row">
         <div className="col-sm-4">
+          <CurrentWeather
+            time={time}
+            temp={temp}
+            description={weather.current.weather[0].description}
+            className="current"
+          />
           <ul>
-            <li className="list-group-item">
+            {/* <li className="list-group-item">
               <p>{time}</p>
               <p>{temp}</p>
               <p>{weather.current.weather[0].description}</p>
-            </li>
+            </li> */}
             {weather.hourly
               .filter((item, index) => index < 6)
               .map((item) => (
