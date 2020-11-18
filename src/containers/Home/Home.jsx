@@ -1,33 +1,19 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import Form from "../../components/Form/Form";
-import API from "../../utils/API";
 import { useHistory } from "react-router-dom";
 import "./Home.css";
-import RiverLocContext from "../../utils/RiverLocContext";
 
 const Home = () => {
-  // const { riverLoc, setRiverLoc, setWeather, setWaterLevel } = useContext(
-  //   RiverLocContext
-  // );
   const [riverSite, setRiverSite] = useState("02335815");
   let history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // API.getWeather(riverLoc.latitude, riverLoc.longitude).then(
-    //   (weatherResponse) => {
-    //     API.getWaterLevel(riverLoc.site).then((waterLevelResponse) => {
-    //       setWeather(weatherResponse.data);
-    //       setWaterLevel(waterLevelResponse.data);
-          history.push(`/location/${riverSite}`);
-    //     });
-    //   }
-    // );
+    history.push(`/location/${riverSite}`);
   };
 
   const handleInputChange = (e) => {
-    // const locInfo = e.target.value
     setRiverSite(e.target.value);
   };
 
