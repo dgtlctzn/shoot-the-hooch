@@ -23,7 +23,11 @@ const Locations = () => {
     current: 0,
   });
 
-  const [locationName, setLocationName] = useState("");
+  const [locationDetails, setLocationDetails] = useState({
+    name: "",
+    siteLatitude: "",
+    siteLongitude: "",
+  });
 
   const [weather, setWeather] = useState({
     time: "",
@@ -102,14 +106,14 @@ const Locations = () => {
 
         API.getWaterLevel(siteNo)
           .then((waterResponse) => {
-            const location =
-              waterResponse.data.value.timeSeries[0].sourceInfo.siteName;
+            const name =
+            titleFormat(waterResponse.data.value.timeSeries[0].sourceInfo.siteName);
             const allLevels =
               waterResponse.data.value.timeSeries[1].values[0].value;
             const { avg, max, min } = findWaterLevels(allLevels);
             const current = parseInt(allLevels[allLevels.length - 1].value);
             setWaterLevels({ ...waterLevels, min, max, avg, current });
-            setLocationName(titleFormat(location));
+            setLocationDetails({...locationDetails, name, siteLatitude, siteLongitude});
           })
           .catch((err) => {
             console.log(err);
