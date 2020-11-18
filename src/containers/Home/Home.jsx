@@ -6,34 +6,29 @@ import "./Home.css";
 import RiverLocContext from "../../utils/RiverLocContext";
 
 const Home = () => {
-  const { riverLoc, setRiverLoc, setWeather, setWaterLevel } = useContext(
-    RiverLocContext
-  );
-
+  // const { riverLoc, setRiverLoc, setWeather, setWaterLevel } = useContext(
+  //   RiverLocContext
+  // );
+  const [riverSite, setRiverSite] = useState("02335815");
   let history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    API.getWeather(riverLoc.latitude, riverLoc.longitude).then(
-      (weatherResponse) => {
-        API.getWaterLevel(riverLoc.site).then((waterLevelResponse) => {
-          setWeather(weatherResponse.data);
-          setWaterLevel(waterLevelResponse.data);
-          history.push(`/location/${riverLoc.location}`);
-        });
-      }
-    );
+    // API.getWeather(riverLoc.latitude, riverLoc.longitude).then(
+    //   (weatherResponse) => {
+    //     API.getWaterLevel(riverLoc.site).then((waterLevelResponse) => {
+    //       setWeather(weatherResponse.data);
+    //       setWaterLevel(waterLevelResponse.data);
+          history.push(`/location/${riverSite}`);
+    //     });
+    //   }
+    // );
   };
 
   const handleInputChange = (e) => {
-    const locInfo = e.target.value.split(" ");
-    setRiverLoc({
-      latitude: locInfo[0],
-      longitude: locInfo[1],
-      location: locInfo[2],
-      site: locInfo[3],
-    });
+    // const locInfo = e.target.value
+    setRiverSite(e.target.value);
   };
 
   return (

@@ -1,25 +1,39 @@
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import moment from "moment";
 import "./Locations.css";
-import RiverLocContext from "../../utils/RiverLocContext";
+// import RiverLocContext from "../../utils/RiverLocContext";
 import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 import HourlyWeather from "../../components/HourlyWeather/HourlyWeather";
 import WaterLevel from "../../components/WaterLevel/WaterLevel";
+import locations from "../../locations.json";
+import API from "../../utils/API";
 
 const Locations = () => {
-  const { weather, waterLevel } = useContext(RiverLocContext);
-  const location = waterLevel.value.timeSeries[0].sourceInfo.siteName;
-  const {
-    latitude,
-    longitude,
-  } = waterLevel.value.timeSeries[0].sourceInfo.geoLocation.geogLocation;
+  const { siteNo } = useParams();
+  const canvasRef = useRef(null);
 
-  const iconClass = weather.current.weather[0].main;
+  const latitude = locations[siteNo].latitude;
+  const longitude = locations[siteNo].longitude;
 
-  const time = moment.unix(weather.current.dt).format("h:mm a");
-  const temp = `${Math.round(weather.current.temp)}°F`;
+  const [waterLevels, setWaterLevels] = useState({
+    min: 0,
+    max: 0,
+    avg: 0,
+    current: 0,
+  });
 
-  const waterLevels = waterLevel.value.timeSeries[1].values[0].value;
+  const [locationName, setLocationName] = useState("");
+
+  const [weather, setWeather] = useState({
+    time: "",
+    temp: "",
+    iconClass: "",
+    description: "",
+    hourly: [],
+  });
+
+  // const { weather, waterLevel } = useContext(RiverLocContext);
 
   // searches API response for lowest/highest water levels and calculates average
   const findWaterLevels = (levels) => {
@@ -36,14 +50,12 @@ const Locations = () => {
       }
       avg += levelVal;
     }
-    avg /= waterLevels.length;
+    avg /= levels.length;
     return { avg, max, min };
   };
 
-  const { avg, max, min } = findWaterLevels(waterLevels);
-  const currentWaterLevel = waterLevels[waterLevels.length - 1].value;
-
-  const canvasRef = useRef(null);
+  // const { avg, max, min } = findWaterLevels(waterLevels);
+  // const currentWaterLevel = waterLevels[waterLevels.length - 1].value;
 
   // changes fontawesome icon based on weather condition
   const displayWeatherIcon = (weatherEvent) => {
@@ -73,15 +85,53 @@ const Locations = () => {
   };
 
   useEffect(() => {
-    if (canvasRef.current) {
+    API.getWeather(latitude, longitude)
+      .then((weatherResponse) => {
+        console.log(weatherResponse);
+        const iconClass = displayWeatherIcon(
+          weatherResponse.data.current.weather[0].main
+        );
+        const time = moment
+          .unix(weatherResponse.data.current.dt)
+          .format("h:mm a");
+        const temp = `${Math.round(weatherResponse.data.current.temp)}°F`;
+        const description = weatherResponse.data.current.weather[0].description;
+        const hourly = weatherResponse.data.hourly;
+
+        setWeather({ ...weather, time, temp, iconClass, description, hourly });
+
+        API.getWaterLevel(siteNo)
+          .then((waterResponse) => {
+            const location =
+              waterResponse.data.value.timeSeries[0].sourceInfo.siteName;
+            const allLevels =
+              waterResponse.data.value.timeSeries[1].values[0].value;
+            const { avg, max, min } = findWaterLevels(allLevels);
+            const current = parseInt(allLevels[allLevels.length - 1].value);
+            setWaterLevels({ ...waterLevels, min, max, avg, current });
+            setLocationName(titleFormat(location));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    // if (canvasRef.current) {
       // size of html canvas
+      // console.log(waterLevels)
       const WIDTH = canvasRef.current.width;
       const HEIGHT = canvasRef.current.height;
 
       // conversion of fixed values to percentage for canvas translation
-      const range = max - min;
-      const percentFill = 1 - currentWaterLevel / range;
-      const percentAvg = 1 - avg / range;
+      const range = waterLevels.max - waterLevels.min;
+      const percentFill = 1 - (waterLevels.current / range);
+      const percentAvg = 1 - (waterLevels.avg / range);
+      console.log(percentFill);
 
       // fills canvas with water based on current level
       const ctx = canvasRef.current.getContext("2d");
@@ -101,30 +151,29 @@ const Locations = () => {
       ctx.fillText("Current", 10, Math.round(HEIGHT * percentFill));
       // ctx.fillText("Max", WIDTH / 2.5, 20);
       // ctx.fillText("Min", WIDTH / 2.5, HEIGHT * 0.95);
-    }
-  }, []);
-  console.log(process.env.REACT_APP_GOOGLE_API_KEY);
+    // }
+  }, [waterLevels]);
 
   return (
     <div className="container">
-      <h1>{titleFormat(location)}</h1>
+      <h1>{titleFormat(locationName)}</h1>
       <div id="main-col" className="row">
         <div className="col-sm-4">
           <CurrentWeather
-            time={time}
-            temp={temp}
-            iconClass={iconClass}
-            description={weather.current.weather[0].description}
-            displayWeatherIcon={displayWeatherIcon}
+            time={weather.time}
+            temp={weather.temp}
+            iconClass={weather.iconClass}
+            description={weather.description}
+            // displayWeatherIcon={displayWeatherIcon}
             className="current"
           />
         </div>
         <div className="col-sm-2">
           <WaterLevel
-            currentWaterLevel={currentWaterLevel}
-            maxWaterLevel={max}
-            minWaterLevel={min}
-            avgWaterLevel={avg}
+            currentWaterLevel={waterLevels.current}
+            maxWaterLevel={waterLevels.max}
+            minWaterLevel={waterLevels.min}
+            avgWaterLevel={waterLevels.avg}
           />
         </div>
         <div className="col-sm-4">
@@ -157,7 +206,7 @@ const Locations = () => {
             height="450"
             frameBorder="0"
             style={{ border: 1 }}
-            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${location}&center=${latitude},${longitude}&zoom=15`}
+            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${locationName}&center=${latitude},${longitude}&zoom=15`}
             allowFullScreen
           ></iframe>
         </div>
