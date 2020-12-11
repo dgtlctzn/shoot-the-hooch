@@ -7,6 +7,7 @@ import HourlyWeather from "../../components/HourlyWeather/HourlyWeather";
 import WaterLevel from "../../components/WaterLevel/WaterLevel";
 import locations from "../../locations.json";
 import API from "../../utils/API";
+import Nav from "../../components/Nav/Nav";
 
 const Locations = () => {
   const { siteName } = useParams();
@@ -164,72 +165,75 @@ const Locations = () => {
   }, [waterLevels]);
 
   return (
-    <div className="container">
-      {/* <h1 className="text-center">{titleFormat(locationDetails.name)}</h1> */}
-      <h1 className="text-center title">{siteName}</h1>
-      <h1 className="text-center loc-header">Current Weather</h1>
-      <div id="main-col" className="row loc-row">
-        <div className="col-sm-3"></div>
-        <div className="col-sm-6">
-          <CurrentWeather
-            time={weather.time}
-            temp={weather.temp}
-            iconClass={weather.iconClass}
-            description={weather.description}
-            className="current"
-          />
-        </div>
-        <div className="col-sm-4"></div>
-      </div>
-      <h1 className="text-center loc-header">Water Level</h1>
-      <div className="row loc-row">
-        <div className="col-sm-2"></div>
-        <div className="col-sm-2">
-          <WaterLevel
-            currentWaterLevel={waterLevels.current}
-            maxWaterLevel={waterLevels.max}
-            minWaterLevel={waterLevels.min}
-            avgWaterLevel={waterLevels.avg}
-          />
-        </div>
-        <div className="col-sm-4">
-          <canvas className="canvas" ref={canvasRef} />
-        </div>
-      </div>
-      <h1 className="text-center loc-header">Hourly Weather</h1>
-      <div className="row loc-row">
-        <div className="col-sm-2"></div>
-        <div className="col-sm-10 hourly">
-          {weather.hourly.map((item, index) => {
-            if (index < 6 && index > 0) {
-              return (
-                <HourlyWeather
-                  key={item.dt}
-                  weather={item}
-                  displayWeatherIcon={displayWeatherIcon}
-                />
-              );
-            }
-          })}
-        </div>
-      </div>
-      <h1 className="text-center loc-header">Map</h1>
-      <div className="row loc-row">
-        <div className="col-sm-3"></div>
-        <div className="col-sm-6 hourly">
+    <>
+      <Nav />
+      <div className="container">
+        {/* <h1 className="text-center">{titleFormat(locationDetails.name)}</h1> */}
+        <h1 className="text-center loc-title">{siteName}</h1>
+        <h1 className="text-center loc-header">Current Weather</h1>
+        <div id="main-col" className="row loc-row">
+          <div className="col-sm-3"></div>
           <div className="col-sm-6">
-            <iframe
-              width="600"
-              height="450"
-              frameBorder="0"
-              style={{ border: 1 }}
-              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${siteName}&center=${latitude},${longitude}&zoom=15`}
-              allowFullScreen
-            ></iframe>
+            <CurrentWeather
+              time={weather.time}
+              temp={weather.temp}
+              iconClass={weather.iconClass}
+              description={weather.description}
+              className="current"
+            />
+          </div>
+          <div className="col-sm-4"></div>
+        </div>
+        <h1 className="text-center loc-header">Water Level</h1>
+        <div className="row loc-row">
+          <div className="col-sm-2"></div>
+          <div className="col-sm-2">
+            <WaterLevel
+              currentWaterLevel={waterLevels.current}
+              maxWaterLevel={waterLevels.max}
+              minWaterLevel={waterLevels.min}
+              avgWaterLevel={waterLevels.avg}
+            />
+          </div>
+          <div className="col-sm-4">
+            <canvas className="canvas" ref={canvasRef} />
+          </div>
+        </div>
+        <h1 className="text-center loc-header">Hourly Weather</h1>
+        <div className="row loc-row">
+          <div className="col-sm-2"></div>
+          <div className="col-sm-10 hourly">
+            {weather.hourly.map((item, index) => {
+              if (index < 6 && index > 0) {
+                return (
+                  <HourlyWeather
+                    key={item.dt}
+                    weather={item}
+                    displayWeatherIcon={displayWeatherIcon}
+                  />
+                );
+              }
+            })}
+          </div>
+        </div>
+        <h1 className="text-center loc-header">Map</h1>
+        <div className="row loc-row">
+          <div className="col-sm-3"></div>
+          <div className="col-sm-6 hourly">
+            <div className="col-sm-6">
+              <iframe
+                width="600"
+                height="450"
+                frameBorder="0"
+                style={{ border: 1 }}
+                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${siteName}&center=${latitude},${longitude}&zoom=15`}
+                allowFullScreen
+              ></iframe>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
