@@ -1,12 +1,17 @@
-{
-    "02335815": {
+[
+    {   "site": "02335815",
         "latitude": 33.87,
         "longitude": -84.34,
-        "location": "northatlanta"
+        "name": "northatlanta"
     },
-    "52335815": {
+    {   "site": "52335815",
         "latitude": 35.87,
         "longitude": -85.34,
-        "location": "atlanta"
+        "name": "atlanta"
+    },
+    {   "site": "02334430",
+        "latitude": 34.09,
+        "longitude": -84.04,
+        "name": "Buford Dam"
     }
-}
+]

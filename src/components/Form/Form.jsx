@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import locations from "../../locations.json"
 
 const Form = ({handleInputChange, handleSubmit}) => {
   return (
     <form onSubmit={handleSubmit}>
       <select className="form-control form-control-lg" onChange={handleInputChange}>
-        <option value="02335815">North Atlanta</option>{/* 33.87 -84.34 northatlanta 02335815 */}
-        <option value="52335815">Atlanta</option>{/* 35.87 -85.34 atlanta 52335815 */}
+        {locations.map(location => (
+          <option value={location.site}>{location.name}</option>
+        ))}
       </select>
       <button type="submit" className="btn btn-primary">
         Shoot the Hooch!
