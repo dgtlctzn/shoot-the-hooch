@@ -7,17 +7,20 @@ const HourlyWeather = ({ weather, displayWeatherIcon }) => {
   const time = moment.unix(weather.dt).format("h:mm a");
   const temp = `${Math.round(weather.temp)}°F`;
   return (
-    <div className="hourly-card">
+    <div className="hourly-card text-center">
       <p>
         <i className="far fa-clock" />
         {time}
       </p>
+      <hr/>
       <p>
         <i className="fas fa-thermometer-empty" />
         {temp}
       </p>
+      <hr/>
       <p>
         <i className={displayWeatherIcon(iconClass)} />
+        <br/>
         {weather.weather[0].description}
       </p>
     </div>

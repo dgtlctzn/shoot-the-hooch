@@ -201,8 +201,8 @@ const Locations = () => {
         </div>
         <h1 className="text-center loc-header">Hourly Weather</h1>
         <div className="row loc-row">
-          <div className="col-sm-2"></div>
-          <div className="col-sm-10 hourly">
+          {/* <div className="col-sm-2"></div> */}
+          <div className="col-sm-12 hourly">
             {weather.hourly.map((item, index) => {
               if (index < 6 && index > 0) {
                 return (
