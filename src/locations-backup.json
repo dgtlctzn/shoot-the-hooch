@@ -1,0 +1,97 @@
+[
+    {   "site": "02334430",
+        "latitude": 34.09,
+        "longitude": -84.04,
+        "name": "Buford Dam"
+    },
+    {   "site": "02334430",
+        "latitude": 34.09,
+        "longitude": -84.04,
+        "name": "Ga. 20 Bridge"
+    },
+    {   "site": "02334430",
+        "latitude": 34.09,
+        "longitude": -84.04,
+        "name": "Settles Bridge"
+    },
+    {   "site": "02334653",
+        "latitude": 34.03,
+        "longitude": -84.06,
+        "name": "McGinnis Ferry"
+    },
+    {   "site": "02334653",
+        "latitude": 34.03,
+        "longitude": -84.06,
+        "name": "Rogers Bridge"
+    },
+    {   "site": "02334653",
+        "latitude": 34.03,
+        "longitude": -84.06,
+        "name": "Abbotts Bridge"
+    },
+    {   "site": "02335000",
+        "latitude": 33.59,
+        "longitude": -84.12,
+        "name": "Medlock Bridge"
+    },
+    {   "site": "02335000",
+        "latitude": 33.59,
+        "longitude": -84.12,
+        "name": "Jones Bridge"
+    },
+    {   "site": "02335000",
+        "latitude": 33.59,
+        "longitude": -84.12,
+        "name": "Garrard Landing"
+    },
+    {   "site": "02335450",
+        "latitude": 34.59,
+        "longitude": -84.18,
+        "name": "Island Ford"
+    },
+    {   "site": "02335450",
+        "latitude": 34.59,
+        "longitude": -84.18,
+        "name": "Don White Park"
+    },
+    {   "site": "02335450",
+        "latitude": 34.59,
+        "longitude": -84.18,
+        "name": "Riverside Park"
+    },
+    {   "site": "02335450",
+        "latitude": 34.59,
+        "longitude": -84.18,
+        "name": "Chattahoochee River Park"
+    },
+    {   "site": "02335450",
+        "latitude": 34.59,
+        "longitude": -84.18,
+        "name": "Chattahoochee Nature Center"
+    },
+    {   "site": "02335450",
+        "latitude": 34.59,
+        "longitude": -84.18,
+        "name": "Overlook Park"
+    },
+    {   "site": "02335815",
+        "latitude": 33.58,
+        "longitude": -84.22,
+        "name": "Morgan Falls Dam"
+    },
+    {   "site": "02335815",
+        "latitude": 33.58,
+        "longitude": -84.22,
+        "name": "Johnson Ferry"
+    },
+    {   "site": "02335815",
+        "latitude": 33.58,
+        "longitude": -84.22,
+        "name": "Powers Island"
+    },
+    {   "site": "02335815",
+        "latitude": 33.58,
+        "longitude": -84.22,
+        "name": "Whitewater Creek"
+    }
+]

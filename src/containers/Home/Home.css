@@ -1,19 +1,20 @@
 body {
-    background-image: url(./img/Chattahoochee-film-min.jpg);
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
+  background-image: url(./img/Chattahoochee-film-min.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .title {
-    font-family: 'Permanent Marker', cursive;
-    font-size: 100px;
-    line-height: .6;
-    color: seashell;
-    text-shadow: 2px 2px 4px #000000;
+  font-family: "Permanent Marker", cursive;
+  font-size: 100px;
+  line-height: 0.6;
+  color: seashell;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 #title {
-    margin-top: 60px;
-    margin-bottom: 30px;
+  margin-top: 60px;
+  margin-bottom: 30px;
 }
+

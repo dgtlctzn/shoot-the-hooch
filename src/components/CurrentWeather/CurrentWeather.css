@@ -1,5 +1,5 @@
 #current {
-    height: 400px;
+    /* height: 300px; */
     background-color: white;
     border-radius: 20px;
     border-style: solid;
@@ -7,7 +7,29 @@
     border-color: black;
 }
 
-.current-icon {
-    font-size: 150px;
-    opacity: .1;
+.icon-row {
+    height: 200px;
 }
+
+.row-titles {
+    margin-top: 20px;
+}
+
+.current-icon {
+    margin-top: 20px;
+    font-size: 150px;
+    opacity: .2;
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+    0% {
+      font-size: 150px;
+    }
+    50% {
+      font-size: 155px; 
+    }
+    100% {
+      font-size: 150px;
+    }
+  }
