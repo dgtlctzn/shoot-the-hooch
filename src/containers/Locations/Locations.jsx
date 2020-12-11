@@ -166,8 +166,9 @@ const Locations = () => {
   return (
     <div className="container">
       {/* <h1 className="text-center">{titleFormat(locationDetails.name)}</h1> */}
-      <h1 className="text-center">{siteName}</h1>
-      <div id="main-col" className="row">
+      <h1 className="text-center title">{siteName}</h1>
+      <h1 className="text-center loc-header">Current Weather</h1>
+      <div id="main-col" className="row loc-row">
         <div className="col-sm-3"></div>
         <div className="col-sm-6">
           <CurrentWeather
@@ -180,8 +181,9 @@ const Locations = () => {
         </div>
         <div className="col-sm-4"></div>
       </div>
-      <div className="row">
-        <div className="col-sm-3"></div>
+      <h1 className="text-center loc-header">Water Level</h1>
+      <div className="row loc-row">
+        <div className="col-sm-2"></div>
         <div className="col-sm-2">
           <WaterLevel
             currentWaterLevel={waterLevels.current}
@@ -194,9 +196,10 @@ const Locations = () => {
           <canvas className="canvas" ref={canvasRef} />
         </div>
       </div>
-      <div className="row">
-        <div className="col-sm-3"></div>
-        <div className="col-sm-6 hourly">
+      <h1 className="text-center loc-header">Hourly Weather</h1>
+      <div className="row loc-row">
+        <div className="col-sm-2"></div>
+        <div className="col-sm-10 hourly">
           {weather.hourly.map((item, index) => {
             if (index < 6 && index > 0) {
               return (
@@ -210,7 +213,8 @@ const Locations = () => {
           })}
         </div>
       </div>
-      <div className="row">
+      <h1 className="text-center loc-header">Map</h1>
+      <div className="row loc-row">
         <div className="col-sm-3"></div>
         <div className="col-sm-6 hourly">
           <div className="col-sm-6">

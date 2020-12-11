@@ -25,3 +25,22 @@
 .hourly {
     display: inline-block;
 }
+
+.loc-row {
+    margin: 30px;
+}
+
+.title {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 100px;
+    margin: 40px;
+    line-height: .9;
+}
+
+.loc-header {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 50px;
+    line-height: .6;
+    color: #000000;
+    text-shadow: 2px 2px 4px seashell;
+}
