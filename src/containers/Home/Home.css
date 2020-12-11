@@ -1,6 +1,8 @@
 body {
     background-image: url(./img/Chattahoochee-film-min.jpg);
+    background-position: center;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .title {

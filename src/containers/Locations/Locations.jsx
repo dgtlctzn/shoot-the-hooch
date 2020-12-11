@@ -162,9 +162,10 @@ const Locations = () => {
 
   return (
     <div className="container">
-      <h1>{titleFormat(locationDetails.name)}</h1>
+      <h1 className="text-center">{titleFormat(locationDetails.name)}</h1>
       <div id="main-col" className="row">
-        <div className="col-sm-4">
+        <div className="col-sm-3"></div>
+        <div className="col-sm-6">
           <CurrentWeather
             time={weather.time}
             temp={weather.temp}
@@ -173,6 +174,10 @@ const Locations = () => {
             className="current"
           />
         </div>
+        <div className="col-sm-4"></div>
+      </div>
+      <div className="row">
+        <div className="col-sm-3"></div>
         <div className="col-sm-2">
           <WaterLevel
             currentWaterLevel={waterLevels.current}
@@ -182,15 +187,12 @@ const Locations = () => {
           />
         </div>
         <div className="col-sm-4">
-          <div className="row">
-            <div className="col-sm-12">
-              <canvas className="canvas" ref={canvasRef} />
-            </div>
-          </div>
+          <canvas className="canvas" ref={canvasRef} />
         </div>
       </div>
       <div className="row">
-        <div className="col-sm-12 hourly">
+        <div className="col-sm-3"></div>
+        <div className="col-sm-6 hourly">
           {weather.hourly.map((item, index) => {
             if (index < 6 && index > 0) {
               return (
@@ -204,16 +206,19 @@ const Locations = () => {
           })}
         </div>
       </div>
-      <div>
-        <div>
-          <iframe
-            width="600"
-            height="450"
-            frameBorder="0"
-            style={{ border: 1 }}
-            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${locationDetails.name}&center=${locationDetails.siteLatitude},${locationDetails.siteLongitude}&zoom=15`}
-            allowFullScreen
-          ></iframe>
+      <div className="row">
+        <div className="col-sm-3"></div>
+        <div className="col-sm-6 hourly">
+          <div className="col-sm-6">
+            <iframe
+              width="600"
+              height="450"
+              frameBorder="0"
+              style={{ border: 1 }}
+              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${locationDetails.name}&center=${locationDetails.siteLatitude},${locationDetails.siteLongitude}&zoom=15`}
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
       </div>
     </div>
