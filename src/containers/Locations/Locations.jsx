@@ -9,12 +9,15 @@ import locations from "../../locations.json";
 import API from "../../utils/API";
 
 const Locations = () => {
-  const { siteNo } = useParams();
+  const { siteName } = useParams();
   const canvasRef = useRef(null);
 
   // latitude and longitude for weather API call
-  const latitude = locations[siteNo].latitude;
-  const longitude = locations[siteNo].longitude;
+  const latitude = locations[siteName].latitude;
+  const longitude = locations[siteName].longitude;
+  const siteNo = locations[siteName].site;
+  // const latitude = locations[siteNo].latitude;
+  // const longitude = locations[siteNo].longitude;
 
   const [waterLevels, setWaterLevels] = useState({
     min: 0,
@@ -162,7 +165,8 @@ const Locations = () => {
 
   return (
     <div className="container">
-      <h1 className="text-center">{titleFormat(locationDetails.name)}</h1>
+      {/* <h1 className="text-center">{titleFormat(locationDetails.name)}</h1> */}
+      <h1 className="text-center">{siteName}</h1>
       <div id="main-col" className="row">
         <div className="col-sm-3"></div>
         <div className="col-sm-6">
@@ -215,7 +219,7 @@ const Locations = () => {
               height="450"
               frameBorder="0"
               style={{ border: 1 }}
-              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${locationDetails.name}&center=${locationDetails.siteLatitude},${locationDetails.siteLongitude}&zoom=15`}
+              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${siteName}&center=${latitude},${longitude}&zoom=15`}
               allowFullScreen
             ></iframe>
           </div>

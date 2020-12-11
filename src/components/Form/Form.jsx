@@ -6,8 +6,8 @@ const Form = ({handleInputChange, handleSubmit}) => {
   return (
     <form onSubmit={handleSubmit}>
       <select className="form-control form-control-lg" onChange={handleInputChange}>
-        {locations.map(location => (
-          <option value={location.site}>{location.name}</option>
+        {Object.keys(locations).map(location => (
+          <option value={location}>{location}</option>
         ))}
       </select>
       <button type="submit" className="btn btn-primary">

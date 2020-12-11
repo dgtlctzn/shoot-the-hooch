@@ -4,16 +4,17 @@ import { useHistory } from "react-router-dom";
 import "./Home.css";
 
 const Home = () => {
-  const [riverSite, setRiverSite] = useState("02335815");
+  const [riverSite, setRiverSite] = useState("northatlanta");
   let history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    history.push(`/location/${riverSite}`);
+    history.push(`/${riverSite}`);
   };
 
   const handleInputChange = (e) => {
+    // console.log(e.target)
     setRiverSite(e.target.value);
   };
 
