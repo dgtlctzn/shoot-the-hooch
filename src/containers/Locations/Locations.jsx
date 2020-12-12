@@ -8,6 +8,7 @@ import WaterLevel from "../../components/WaterLevel/WaterLevel";
 import locations from "../../locations.json";
 import API from "../../utils/API";
 import Nav from "../../components/Nav/Nav";
+import Buttons from "../../components/Buttons/Buttons"
 
 const Locations = () => {
   const { siteName } = useParams();
@@ -17,8 +18,11 @@ const Locations = () => {
   const latitude = locations[siteName].latitude;
   const longitude = locations[siteName].longitude;
   const siteNo = locations[siteName].site;
-  // const latitude = locations[siteNo].latitude;
-  // const longitude = locations[siteNo].longitude;
+
+  const [limit, setLimit] = useState({
+    lower: 0,
+    upper: 5
+  })
 
   const [waterLevels, setWaterLevels] = useState({
     min: 0,
@@ -164,6 +168,21 @@ const Locations = () => {
     // ctx.fillText("Min", WIDTH / 2.5, HEIGHT * 0.95);
   }, [waterLevels]);
 
+  // increases range for viewing hourly weather 
+  const handleNextButton = (e) => {
+    console.log(e.target.name)
+    if (limit.upper < 40) {
+      setLimit({...limit, upper: limit.upper + 5, lower: limit.lower + 5});
+    }
+  }
+
+  const handleBackButton = (e) => {
+    console.log(e.target.name)
+    if (limit.lower !== 0) {
+      setLimit({...limit, upper: limit.upper - 5, lower: limit.lower - 5});
+    }
+  }
+
   return (
     <>
       <Nav />
@@ -201,10 +220,9 @@ const Locations = () => {
         </div>
         <h1 className="text-center loc-header">Hourly Weather</h1>
         <div className="row loc-row">
-          {/* <div className="col-sm-2"></div> */}
           <div className="col-sm-12 hourly">
             {weather.hourly.map((item, index) => {
-              if (index < 6 && index > 0) {
+              if (index <= limit.upper && index > limit.lower) {
                 return (
                   <HourlyWeather
                     key={item.dt}
@@ -216,6 +234,12 @@ const Locations = () => {
             })}
           </div>
         </div>
+        <div className="row">
+          <div className="col-sm-12 text-center">
+            <Buttons handleNextButton={handleNextButton} handleBackButton={handleBackButton}/>
+          </div>
+        </div>
+        <br/>
         <h1 className="text-center loc-header">Map</h1>
         <div className="row loc-row">
             <div className="col-sm-12 map text-center">
