@@ -46,3 +46,8 @@
     color: seashell;
     text-shadow: 2px 2px 4px #000000;
 }
+
+.map {
+    display: inline-block;
+    /* margin: auto; */
+}

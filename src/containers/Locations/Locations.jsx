@@ -218,9 +218,7 @@ const Locations = () => {
         </div>
         <h1 className="text-center loc-header">Map</h1>
         <div className="row loc-row">
-          <div className="col-sm-3"></div>
-          <div className="col-sm-6 hourly">
-            <div className="col-sm-6">
+            <div className="col-sm-12 map text-center">
               <iframe
                 width="600"
                 height="450"
@@ -230,7 +228,6 @@ const Locations = () => {
                 allowFullScreen
               ></iframe>
             </div>
-          </div>
         </div>
       </div>
     </>
