@@ -178,25 +178,22 @@ const Locations = () => {
         setTimeout(() => {
           if (degrees === 180 && increase) {
             degrees -= 1;
-            window.requestAnimationFrame(() =>
-              animateWater(waterLevels, (degrees = degrees), (increase = false))
-            );
+            increase = false;
           } else if (degrees === 0 && !increase) {
             degrees += 1;
-            window.requestAnimationFrame(() =>
-              animateWater(waterLevels, (degrees = degrees), (increase = true))
-            );
+            increase = true;
           } else if (increase) {
             degrees += 1;
-            window.requestAnimationFrame(() =>
-              animateWater(waterLevels, (degrees = degrees), (increase = true))
-            );
           } else if (!increase) {
             degrees -= 1;
-            window.requestAnimationFrame(() =>
-              animateWater(waterLevels, (degrees = degrees), (increase = false))
-            );
           }
+          window.requestAnimationFrame(() =>
+            animateWater(
+              waterLevels,
+              (degrees = degrees),
+              (increase = increase)
+            )
+          );
         }, 10);
       }
     }
