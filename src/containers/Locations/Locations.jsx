@@ -138,6 +138,38 @@ const Locations = () => {
       });
   }, []);
 
+  const animateWater = (width, height, percentFill, degrees=0, increase=true) => {
+    const canvas = document.getElementById("canvas").getContext("2d");
+
+    canvas.clearRect(0, 0, width, height);
+    canvas.fillStyle = "rgb(194, 231, 255)";
+
+    // let pi = -3.14;
+    // const increment = pi / 100;
+    let change = degrees * (Math.PI / 180)
+    let newFill = Math.sin(change) / 50;
+
+    if (percentFill) {
+      canvas.fillRect(0, 0, width, (height * (percentFill + newFill)));
+      console.log(newFill)
+      setTimeout(() => {
+        if (degrees === 180 && increase) {
+          degrees -= 1;
+          window.requestAnimationFrame(() => animateWater(width, height, percentFill, degrees=degrees, increase=false));
+        } else if (degrees === 0 && !increase) {
+          degrees += 1;
+          window.requestAnimationFrame(() => animateWater(width, height, percentFill, degrees=degrees, increase=true));
+        } else if (increase) {
+          degrees += 1;
+          window.requestAnimationFrame(() => animateWater(width, height, percentFill, degrees=degrees, increase=true));
+        } else if (!increase) {
+          degrees -= 1;
+          window.requestAnimationFrame(() => animateWater(width, height, percentFill, degrees=degrees, increase=false));
+        }
+      }, 10);
+    }
+  }
+
   useEffect(() => {
     // size of html canvas
     const WIDTH = canvasRef.current.width;
@@ -149,9 +181,10 @@ const Locations = () => {
     const percentAvg = 1 - waterLevels.avg / range;
 
     // fills canvas with water based on current level
-    const ctx = canvasRef.current.getContext("2d");
-    ctx.fillStyle = "rgb(194, 231, 255)";
-    ctx.fillRect(0, 0, WIDTH, Math.round(HEIGHT * percentFill));
+    const ctx = document.getElementById("canvas").getContext("2d");
+    // ctx.clearRect(0, 0, WIDTH, HEIGHT);
+    // ctx.fillStyle = "rgb(194, 231, 255)";
+    // ctx.fillRect(0, 0, WIDTH, Math.round(HEIGHT * percentFill));
 
     // adds line to canvas for average water level
     ctx.strokeStyle = "red";
@@ -166,6 +199,9 @@ const Locations = () => {
     ctx.fillText("Current", 10, Math.round(HEIGHT * percentFill));
     // ctx.fillText("Max", WIDTH / 2.5, 20);
     // ctx.fillText("Min", WIDTH / 2.5, HEIGHT * 0.95);
+    // console.log(percentFill)
+    animateWater(WIDTH, HEIGHT, percentFill);
+
   }, [waterLevels]);
 
   // increases range for viewing hourly weather 
@@ -215,7 +251,7 @@ const Locations = () => {
             />
           </div>
           <div className="col-sm-4">
-            <canvas className="canvas" ref={canvasRef} />
+            <canvas id="canvas" className="canvas" ref={canvasRef} />
           </div>
         </div>
         <h1 className="text-center loc-header">Hourly Weather</h1>
