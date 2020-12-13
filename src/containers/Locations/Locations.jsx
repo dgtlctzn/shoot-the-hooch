@@ -148,8 +148,8 @@ const Locations = () => {
 
       // conversion of fixed values to percentage for canvas translation
       const range = waterLevels.max - waterLevels.min;
-      const percentFill = 1 - waterLevels.current / range;
-      const percentAvg = 1 - waterLevels.avg / range;
+      const percentFill = 1 - (waterLevels.current - waterLevels.min) / range;
+      const percentAvg = 1 - (waterLevels.avg - waterLevels.min) / range;
 
       canvas.clearRect(0, 0, width, height);
       canvas.fillStyle = "rgb(194, 231, 255)";
@@ -158,7 +158,7 @@ const Locations = () => {
       let change = degrees * (Math.PI / 180);
       // gives value between 0 and 1 and weighs it with arbitrary no. to be added to percent fill
       let newFill = Math.sin(change) / 50;
-      // console.log(Math.sin(change))
+
       if (percentFill) {
         canvas.fillRect(0, 0, width, height * (percentFill + newFill));
 
