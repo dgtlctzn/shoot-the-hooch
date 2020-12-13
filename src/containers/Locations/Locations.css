@@ -51,3 +51,7 @@
     display: inline-block;
     /* margin: auto; */
 }
+
+iframe {
+    padding: 30px;
+}

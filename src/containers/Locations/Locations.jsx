@@ -12,7 +12,7 @@ import Buttons from "../../components/Buttons/Buttons";
 
 const Locations = () => {
   const { siteName } = useParams();
-  const canvasRef = useRef(null);
+  const canvasRef = useRef();
 
   // latitude and longitude for weather API call
   const latitude = locations[siteName].latitude;
@@ -138,85 +138,67 @@ const Locations = () => {
       });
   }, []);
 
-  const animateWater = (
-    waterLevels,
-    degrees = 0,
-    increase = true
-  ) => {
-    const canvas = canvasRef.current.getContext("2d");
+  const animateWater = (waterLevels, degrees = 0, increase = true) => {
+    if (canvasRef.current) {
+      const canvas = canvasRef.current.getContext("2d");
 
-    // size of html canvas
-    const width = canvasRef.current.width;
-    const height = canvasRef.current.height;
+      // size of html canvas
+      const width = canvasRef.current.width;
+      const height = canvasRef.current.height;
 
-    // conversion of fixed values to percentage for canvas translation
-    const range = waterLevels.max - waterLevels.min;
-    const percentFill = 1 - waterLevels.current / range;
-    const percentAvg = 1 - waterLevels.avg / range;
+      // conversion of fixed values to percentage for canvas translation
+      const range = waterLevels.max - waterLevels.min;
+      const percentFill = 1 - waterLevels.current / range;
+      const percentAvg = 1 - waterLevels.avg / range;
 
-    canvas.clearRect(0, 0, width, height);
-    canvas.fillStyle = "rgb(194, 231, 255)";
+      canvas.clearRect(0, 0, width, height);
+      canvas.fillStyle = "rgb(194, 231, 255)";
 
-    // converts degrees into radians
-    let change = degrees * (Math.PI / 180);
-    // gives value between 0 and 1 and weighs it with arbitrary no. to be added to percent fill
-    let newFill = Math.sin(change) / 50;
+      // converts degrees into radians
+      let change = degrees * (Math.PI / 180);
+      // gives value between 0 and 1 and weighs it with arbitrary no. to be added to percent fill
+      let newFill = Math.sin(change) / 50;
 
-    if (percentFill) {
-      canvas.fillRect(0, 0, width, height * (percentFill + newFill));
+      if (percentFill) {
+        canvas.fillRect(0, 0, width, height * (percentFill + newFill));
 
-      // adds line to canvas for average water level
-      canvas.strokeStyle = "red";
-      canvas.moveTo(0, height * percentAvg);
-      canvas.lineTo(width, height * percentAvg);
-      canvas.stroke();
+        // adds line to canvas for average water level
+        canvas.strokeStyle = "red";
+        canvas.moveTo(0, height * percentAvg);
+        canvas.lineTo(width, height * percentAvg);
+        canvas.stroke();
 
-      // adds text to canvas for each value
-      canvas.font = "20px Arial";
-      canvas.fillStyle = "black";
-      canvas.fillText("Average", width - 100, height * percentAvg);
-      canvas.fillText("Current", 10, Math.round(height * percentFill));
+        // adds text to canvas for each value
+        canvas.font = "20px Arial";
+        canvas.fillStyle = "black";
+        canvas.fillText("Average", width - 100, height * percentAvg);
+        canvas.fillText("Current", 10, Math.round(height * percentFill));
 
-      // cycles between 0 and 180 degrees and calls recursive function
-      setTimeout(() => {
-        if (degrees === 180 && increase) {
-          degrees -= 1;
-          window.requestAnimationFrame(() =>
-            animateWater(
-              waterLevels,
-              (degrees = degrees),
-              (increase = false)
-            )
-          );
-        } else if (degrees === 0 && !increase) {
-          degrees += 1;
-          window.requestAnimationFrame(() =>
-            animateWater(
-              waterLevels,
-              (degrees = degrees),
-              (increase = true)
-            )
-          );
-        } else if (increase) {
-          degrees += 1;
-          window.requestAnimationFrame(() =>
-            animateWater(
-              waterLevels,
-              (degrees = degrees),
-              (increase = true)
-            )
-          );
-        } else if (!increase) {
-          degrees -= 1;
-          window.requestAnimationFrame(() =>
-            animateWater(
-              waterLevels,
-              (degrees = degrees),
-              (increase = false)
-            )
-          );
-        }
-      }, 10);
+        // cycles between 0 and 180 degrees and calls recursive function
+        setTimeout(() => {
+          if (degrees === 180 && increase) {
+            degrees -= 1;
+            window.requestAnimationFrame(() =>
+              animateWater(waterLevels, (degrees = degrees), (increase = false))
+            );
+          } else if (degrees === 0 && !increase) {
+            degrees += 1;
+            window.requestAnimationFrame(() =>
+              animateWater(waterLevels, (degrees = degrees), (increase = true))
+            );
+          } else if (increase) {
+            degrees += 1;
+            window.requestAnimationFrame(() =>
+              animateWater(waterLevels, (degrees = degrees), (increase = true))
+            );
+          } else if (!increase) {
+            degrees -= 1;
+            window.requestAnimationFrame(() =>
+              animateWater(waterLevels, (degrees = degrees), (increase = false))
+            );
+          }
+        }, 10);
+      }
     }
   };
 
@@ -310,6 +292,20 @@ const Locations = () => {
               src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${siteName}&center=${latitude},${longitude}&zoom=15`}
               allowFullScreen
             ></iframe>
+          </div>
+        </div>
+        <h1 className="text-center loc-header">Shoot the hooch!</h1>
+        <div className="row">
+          <div className="col-sm-12 text-center">
+            <iframe
+              width="600"
+              height="450"
+              src="https://www.youtube.com/embed/JW5UEW2kYvc"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+            <br />
           </div>
         </div>
       </div>
