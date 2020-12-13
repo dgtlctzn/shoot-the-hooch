@@ -181,7 +181,6 @@ const Locations = () => {
           } else {
             degrees++;
           }
-          console.log(degrees)
           window.requestAnimationFrame(() =>
             animateWater(
               waterLevels,
@@ -199,14 +198,12 @@ const Locations = () => {
 
   // increases range for viewing hourly weather
   const handleNextButton = (e) => {
-    console.log(e.target.name);
     if (limit.upper < 40) {
       setLimit({ ...limit, upper: limit.upper + 5, lower: limit.lower + 5 });
     }
   };
 
   const handleBackButton = (e) => {
-    console.log(e.target.name);
     if (limit.lower !== 0) {
       setLimit({ ...limit, upper: limit.upper - 5, lower: limit.lower - 5 });
     }
