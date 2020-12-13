@@ -138,7 +138,7 @@ const Locations = () => {
       });
   }, []);
 
-  const animateWater = (waterLevels, degrees = 0, increase = true) => {
+  const animateWater = (waterLevels, degrees = 0) => {
     if (canvasRef.current) {
       const canvas = canvasRef.current.getContext("2d");
 
@@ -158,7 +158,7 @@ const Locations = () => {
       let change = degrees * (Math.PI / 180);
       // gives value between 0 and 1 and weighs it with arbitrary no. to be added to percent fill
       let newFill = Math.sin(change) / 50;
-
+      // console.log(Math.sin(change))
       if (percentFill) {
         canvas.fillRect(0, 0, width, height * (percentFill + newFill));
 
@@ -174,24 +174,18 @@ const Locations = () => {
         canvas.fillText("Average", width - 100, height * percentAvg);
         canvas.fillText("Current", 10, Math.round(height * percentFill));
 
-        // cycles between 0 and 180 degrees and calls recursive function
+        // cycles between 0 and 360 degrees and calls recursive function
         setTimeout(() => {
-          if (degrees === 180 && increase) {
-            degrees -= 1;
-            increase = false;
-          } else if (degrees === 0 && !increase) {
-            degrees += 1;
-            increase = true;
-          } else if (increase) {
-            degrees += 1;
-          } else if (!increase) {
-            degrees -= 1;
+          if (degrees === 360) {
+            degrees = 0;
+          } else {
+            degrees++;
           }
+          console.log(degrees)
           window.requestAnimationFrame(() =>
             animateWater(
               waterLevels,
               (degrees = degrees),
-              (increase = increase)
             )
           );
         }, 10);
