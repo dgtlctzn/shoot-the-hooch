@@ -157,9 +157,9 @@ const Locations = () => {
     canvas.clearRect(0, 0, width, height);
     canvas.fillStyle = "rgb(194, 231, 255)";
 
-    // let pi = -3.14;
-    // const increment = pi / 100;
+    // converts degrees into radians
     let change = degrees * (Math.PI / 180);
+    // gives value between 0 and 1 and weighs it with arbitrary no. to be added to percent fill
     let newFill = Math.sin(change) / 50;
 
     if (percentFill) {
@@ -176,7 +176,8 @@ const Locations = () => {
       canvas.fillStyle = "black";
       canvas.fillText("Average", width - 100, height * percentAvg);
       canvas.fillText("Current", 10, Math.round(height * percentFill));
-      // console.log(newFill);
+
+      // cycles between 0 and 180 degrees and calls recursive function
       setTimeout(() => {
         if (degrees === 180 && increase) {
           degrees -= 1;
@@ -220,35 +221,6 @@ const Locations = () => {
   };
 
   useEffect(() => {
-    // size of html canvas
-    // const WIDTH = canvasRef.current.width;
-    // const HEIGHT = canvasRef.current.height;
-
-    // // conversion of fixed values to percentage for canvas translation
-    // const range = waterLevels.max - waterLevels.min;
-    // const percentFill = 1 - waterLevels.current / range;
-    // const percentAvg = 1 - waterLevels.avg / range;
-
-    // // fills canvas with water based on current level
-    // const ctx = document.getElementById("canvas").getContext("2d");
-    // // ctx.clearRect(0, 0, WIDTH, HEIGHT);
-    // // ctx.fillStyle = "rgb(194, 231, 255)";
-    // // ctx.fillRect(0, 0, WIDTH, Math.round(HEIGHT * percentFill));
-
-    // // adds line to canvas for average water level
-    // ctx.strokeStyle = "red";
-    // ctx.moveTo(0, HEIGHT * percentAvg);
-    // ctx.lineTo(WIDTH, HEIGHT * percentAvg);
-    // ctx.stroke();
-
-    // // adds text to canvas for each value
-    // ctx.font = "20px Arial";
-    // ctx.fillStyle = "black";
-    // ctx.fillText("Average", WIDTH - 100, HEIGHT * percentAvg);
-    // ctx.fillText("Current", 10, Math.round(HEIGHT * percentFill));
-    // ctx.fillText("Max", WIDTH / 2.5, 20);
-    // ctx.fillText("Min", WIDTH / 2.5, HEIGHT * 0.95);
-    // console.log(percentFill)
     animateWater(waterLevels);
   }, [waterLevels]);
 
