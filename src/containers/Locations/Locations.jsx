@@ -13,7 +13,7 @@ import Buttons from "../../components/Buttons/Buttons";
 const Locations = () => {
   const { siteName } = useParams();
   const canvasRef = useRef();
-  const googleSearch = locations[siteName].name
+  const googleSearch = locations[siteName].name;
 
   // latitude and longitude for weather API call
   const latitude = locations[siteName].latitude;
@@ -109,11 +109,18 @@ const Locations = () => {
 
         API.getWaterLevel(siteNo)
           .then((waterResponse) => {
+            console.log(waterResponse);
+
             const name = titleFormat(
               waterResponse.data.value.timeSeries[0].sourceInfo.siteName
             );
-            const allLevels =
-              waterResponse.data.value.timeSeries[1].values[0].value;
+            let allLevels;
+            const { timeSeries } = waterResponse.data.value;
+            for (const series of timeSeries) {
+              if (series.variable.unit.unitCode === "ft3/s") {
+                allLevels = series.values[0].value
+              }
+            }
             const { avg, max, min } = findWaterLevels(allLevels);
             const current = parseInt(allLevels[allLevels.length - 1].value);
             const geocoordinates =
@@ -183,10 +190,7 @@ const Locations = () => {
             degrees++;
           }
           window.requestAnimationFrame(() =>
-            animateWater(
-              waterLevels,
-              (degrees = degrees),
-            )
+            animateWater(waterLevels, (degrees = degrees))
           );
         }, 10);
       }
@@ -209,8 +213,6 @@ const Locations = () => {
       setLimit({ ...limit, upper: limit.upper - 5, lower: limit.lower - 5 });
     }
   };
-
-
 
   return (
     <>
@@ -292,9 +294,9 @@ const Locations = () => {
               width="600"
               height="450"
               src="https://www.youtube.com/embed/JW5UEW2kYvc"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
             <br />
           </div>
