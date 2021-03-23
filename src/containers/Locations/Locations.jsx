@@ -13,6 +13,7 @@ import Buttons from "../../components/Buttons/Buttons";
 const Locations = () => {
   const { siteName } = useParams();
   const canvasRef = useRef();
+  const googleSearch = locations[siteName].name
 
   // latitude and longitude for weather API call
   const latitude = locations[siteName].latitude;
@@ -209,6 +210,8 @@ const Locations = () => {
     }
   };
 
+
+
   return (
     <>
       <Nav />
@@ -277,7 +280,7 @@ const Locations = () => {
               height="450"
               frameBorder="0"
               style={{ border: 1 }}
-              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${siteName}&center=${latitude},${longitude}&zoom=15`}
+              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${googleSearch}&center=${latitude},${longitude}&zoom=15`}
               allowFullScreen
             ></iframe>
           </div>

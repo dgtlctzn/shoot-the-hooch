@@ -5,7 +5,7 @@ import "./Home.css";
 import Nav from "../../components/Nav/Nav";
 
 const Home = () => {
-  const [riverSite, setRiverSite] = useState("Powers Island");
+  const [riverSite, setRiverSite] = useState("Buford Dam");
   let history = useHistory();
 
   const handleSubmit = (e) => {

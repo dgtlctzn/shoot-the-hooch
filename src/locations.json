@@ -1,100 +1,110 @@
 {
-    "Buford Dam": 
-        {   
-            "site": "02334430",
-            "latitude": 34.09,
-            "longitude": -84.04
-        },
-    "Ga. 20 Bridge":
-        {   
-            "site": "02334430",
-            "latitude": 34.09,
-            "longitude": -84.04
-        },
-    "Settles Bridge":
-        {   
-            "site": "02334430",
-            "latitude": 34.09,
-            "longitude": -84.04
-        },
-    "McGinnis Ferry":
-        {   "site": "02334653",
-            "latitude": 34.03,
-            "longitude": -84.06
-        },
-    "Rogers Bridge":
-        {   "site": "02334653",
-            "latitude": 34.03,
-            "longitude": -84.06
-        },
-    "Abbotts Bridge":
-        {   "site": "02334653",
-            "latitude": 34.03,
-            "longitude": -84.06
-        },
-    "Medlock Bridge":
-        {   "site": "02335000",
-            "latitude": 33.59,
-            "longitude": -84.12
-        },
-    "Jones Bridge":
-        {   "site": "02335000",
-            "latitude": 33.59,
-            "longitude": -84.12
-        },
-    "Garrard Landing":
-        {   "site": "02335000",
-            "latitude": 33.59,
-            "longitude": -84.12
-        },
-    "Island Ford":
-        {   "site": "02335450",
-            "latitude": 34.59,
-            "longitude": -84.18
-        },
-    "Don White Park":
-        {   "site": "02335450",
-            "latitude": 34.59,
-            "longitude": -84.18
-        },
-    "Riverside Park":
-        {   "site": "02335450",
-            "latitude": 34.59,
-            "longitude": -84.18
-        },
-    "Chattahoochee River Park":
-        {   "site": "02335450",
-            "latitude": 34.59,
-            "longitude": -84.18
-        },
-    "Chattahoochee Nature Center":
-        {   "site": "02335450",
-            "latitude": 34.59,
-            "longitude": -84.18
-        },
-    "Overlook Park":
-        {   "site": "02335450",
-            "latitude": 34.59,
-            "longitude": -84.18
-        },
-    "Morgan Falls Dam":
-        {   "site": "02335815",
-            "latitude": 33.58,
-            "longitude": -84.22
-        },
-    "Johnson Ferry":
-        {   "site": "02335815",
-            "latitude": 33.58,
-            "longitude": -84.22
-        },
-    "Powers Island":
-        {   "site": "02335815",
-            "latitude": 33.58,
-            "longitude": -84.22
-        },
-    "Whitewater Creek":
-        {   "site": "02335815",
-            "latitude": 33.58,
-            "longitude": -84.22
-        }
+    "Buford Dam": {
+        "site": "02334430",
+        "latitude": 34.1578937,
+        "longitude": -84.0775547,
+        "name": "Buford Dam Tailwater Boat Ramp"
+    },
+    "Settles Bridge": {
+        "site": "02334430",
+        "latitude": 34.0979588,
+        "longitude": -84.1109872,
+        "name": "Settles Bridge Unit"
+    },
+    "McGinnis Ferry": {
+        "site": "02334653",
+        "latitude": 34.0515839,
+        "longitude": -84.0988376,
+        "name": "Boat Ramp McGinnis Ferry Road"
+    },
+    "Rogers Bridge": {
+        "site": "02334653",
+        "latitude": 34.0286444,
+        "longitude": -84.1417287,
+        "name": "Rogers Bridge Tubing Launch Point"
+    },
+    "Abbotts Bridge": {
+        "site": "02334653",
+        "latitude": 34.0244135,
+        "longitude": -84.1732116,
+        "name": "Abbotts Bridge Recreation Area"
+    },
+    "Medlock Bridge": {
+        "site": "02335000",
+        "latitude": 33.9942113,
+        "longitude": -84.2214704,
+        "name": "Medlock Bridge Chattahoochee River National Recreation Area"
+    },
+    "Jones Bridge": {
+        "site": "02335000",
+        "latitude": 34.0008278,
+        "longitude": -84.2409348,
+        "name": "Jones Bridge Unit, Chattahoochee National Recreation Area"
+    },
+    "Garrard Landing": {
+        "site": "02335000",
+        "latitude": 33.9726158,
+        "longitude": -84.2723306,
+        "name": "Garrard Landing Park"
+    },
+    "Island Ford": {
+        "site": "02335450",
+        "latitude": 34.0087035,
+        "longitude": -84.343903,
+        "name": "Island Ford Trailhead, no parking"
+    },
+    "Don White Park": {
+        "site": "02335450",
+        "latitude": 34.0104835,
+        "longitude": -84.3400669,
+        "name": "Don White Memorial Park"
+    },
+    "Riverside Park": {
+        "site": "02335450",
+        "latitude": 34.0066522,
+        "longitude": -84.3468194,
+        "name": "Riverside Park"
+    },
+    "Chattahoochee Nature Center": {
+        "site": "02335450",
+        "latitude": 34.0024807,
+        "longitude": -84.3891175,
+        "name": "Chattahoochee Nature Center" 
+    },
+    "Azalea Boat Launch": {
+        "site": "02335450",
+        "latitude": 34.0018345,
+        "longitude": -84.3633554,
+        "name": "Azalea Boat Launch"
+    },
+    "Morgan Falls Dam": {
+        "site": "02335815",
+        "latitude": 33.9668549,
+        "longitude": -84.383946,
+        "name": "Morgan Falls River Park / Dog Park"
+    },
+    "Johnson Ferry": {
+        "site": "02335815",
+        "latitude": 33.9464626,
+        "longitude": -84.4051594,
+        "name": "NOC Chattahoochee Outpost - Johnson Ferry"
+    },
+    "Powers Island": {
+        "site": "02335815",
+        "latitude": 33.9052144,
+        "longitude": -84.4459484,
+        "name": "NOC Chattahoochee Outpost - Powers Island"
+    },
+    "Whitewater Creek": {
+        "site": "02335815",
+        "latitude": 33.8786434,
+        "longitude": -84.4431429,
+        "name": "CRNRA--East Palisades Unit - Whitewater Trail"
+    },
+    "Paces Mill": {
+        "site": "02335815",
+        "latitude": 33.869671,
+        "longitude": -84.452123,
+        "name": "Paces Mill Boat Ramp"
+    }
 }
