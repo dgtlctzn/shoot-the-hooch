@@ -52,10 +52,10 @@ iframe {
 
 @media screen and (max-width: 530px) {
     .canvas {
-        width: 92vw;
+        width: 85vw;
     }
     iframe {
-        width: 95vw;
+        width: 85vw;
     }
     .loc-title {
         font-size: 75px;
