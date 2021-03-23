@@ -8,7 +8,7 @@
 
   ## Usage
   
-  [Shoot the Hooch!](https://shoot-the-hooch.netlify.app/)
+  [Shoot the Hooch!](https://shootthehooch.netlify.app/)
 
   ## Questions
   Github profile: [dgtlctzn](https://github.com/dgtlctzn)
