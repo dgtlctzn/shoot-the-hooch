@@ -33,7 +33,7 @@ const Home = () => {
         <div className="row">
           <div className="col-sm-2"></div>
           <div className="col-sm-8 text-center">
-            <p id="intro-text">A site for ATLiens to monitor water levels and weather for shooting the hooch</p>
+            <p id="intro-text">A site for ATLiens to monitor water levels and weather for the Chattahoochee River</p>
           </div>
         </div>
         <div className="row">
