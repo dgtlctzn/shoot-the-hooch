@@ -243,7 +243,7 @@ const Locations = () => {
               avgWaterLevel={waterLevels.avg}
             />
           </div>
-          <div className="col-m-8 col-xl-4">
+          <div className="col-m-8 col-xl-4 text-center">
             <canvas id="canvas" className="canvas" ref={canvasRef} />
           </div>
         </div>

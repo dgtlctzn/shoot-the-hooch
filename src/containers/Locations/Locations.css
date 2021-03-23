@@ -50,7 +50,7 @@ iframe {
     }
 } */
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 530px) {
     .canvas {
         width: 92vw;
     }
