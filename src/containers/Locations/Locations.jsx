@@ -234,7 +234,7 @@ const Locations = () => {
         </div>
         <h1 className="text-center loc-header">Water Level</h1>
         <div className="row loc-row">
-          <div className="col-md-1 col-xl-2"></div>
+          <div className="col-md-0 col-xl-2"></div>
           <div className="col-md-8 col-xl-2">
             <WaterLevel
               currentWaterLevel={waterLevels.current}
