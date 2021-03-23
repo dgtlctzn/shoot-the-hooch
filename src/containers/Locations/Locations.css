@@ -5,25 +5,11 @@
 } */
 
 .canvas {
+    margin-top: 20px;
     height: 400px;
     width: 500px;
     border-radius: 20px;
     background-color: #007bff;
-    /* -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    transform: rotate(180deg); */
-    /* font-size: 40px; */
-    /* color: white; */
-}
-
-/* #main-col {
-    background-color: white;
-} */
-
-.hourly {
-    display: inline-block;
 }
 
 .loc-row {
@@ -54,4 +40,24 @@
 
 iframe {
     padding: 30px;
+    width: 50vw;
+    height: 500px;
+}
+
+/* @media screen and (max-width: 991px) {
+    .canvas {
+        width: 92vw;
+    }
+} */
+
+@media screen and (max-width: 450px) {
+    .canvas {
+        width: 92vw;
+    }
+    iframe {
+        width: 95vw;
+    }
+    .loc-title {
+        font-size: 75px;
+    }
 }

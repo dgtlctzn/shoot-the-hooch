@@ -234,8 +234,8 @@ const Locations = () => {
         </div>
         <h1 className="text-center loc-header">Water Level</h1>
         <div className="row loc-row">
-          <div className="col-sm-2"></div>
-          <div className="col-sm-2">
+          <div className="col-md-1 col-xl-2"></div>
+          <div className="col-md-8 col-xl-2">
             <WaterLevel
               currentWaterLevel={waterLevels.current}
               maxWaterLevel={waterLevels.max}
@@ -243,7 +243,7 @@ const Locations = () => {
               avgWaterLevel={waterLevels.avg}
             />
           </div>
-          <div className="col-sm-4">
+          <div className="col-m-8 col-xl-4">
             <canvas id="canvas" className="canvas" ref={canvasRef} />
           </div>
         </div>
@@ -276,8 +276,8 @@ const Locations = () => {
         <div className="row loc-row">
           <div className="col-sm-12 map text-center">
             <iframe
-              width="600"
-              height="450"
+              // width="600"
+              // height="450"
               frameBorder="0"
               style={{ border: 1 }}
               src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API_KEY}&q=${googleSearch}&center=${latitude},${longitude}&zoom=15`}
@@ -289,8 +289,8 @@ const Locations = () => {
         <div className="row">
           <div className="col-sm-12 text-center">
             <iframe
-              width="600"
-              height="450"
+              // width="600"
+              // height="450"
               src="https://www.youtube.com/embed/JW5UEW2kYvc"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
