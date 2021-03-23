@@ -6,8 +6,8 @@ import "./Form.css";
 const Form = ({ handleInputChange, handleSubmit }) => {
   return (
     <form id="master-form" onSubmit={handleSubmit}>
-      <div className="row">
-        <div className="col-sm-10">
+      {/* <div className="row">
+        <div className="col-sm-8"> */}
           <select
             id="search-form"
             className="form-control form-control-lg"
@@ -17,13 +17,13 @@ const Form = ({ handleInputChange, handleSubmit }) => {
               <option value={location}>{location}</option>
             ))}
           </select>
-        </div>
-        <div className="col-sm-2">
+        {/* </div>
+        <div className="col-sm-4"> */}
           <button id="search-river" type="submit" className="btn btn-primary">
             Go!
           </button>
-        </div>
-      </div>
+        {/* </div>
+      </div> */}
     </form>
   );
 };

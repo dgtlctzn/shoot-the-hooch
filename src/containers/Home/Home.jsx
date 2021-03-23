@@ -23,14 +23,22 @@ const Home = () => {
     <>
       <Nav />
       <div id="home" className="container">
-        <div id="title" className="text-center">
-          <p className="title">SHOOT</p>
-          <p className="title">THE</p>
-          <p className="title">HOOCH!</p>
+        <div id="title" className="row">
+          <div className="col-sm-12 text-center">
+            <p className="title">SHOOT</p>
+            <p className="title">THE</p>
+            <p className="title">HOOCH!</p>
+          </div>
         </div>
         <div className="row">
-          <div className="col-sm-4"></div>
-          <div className="col-sm-4">
+          <div className="col-sm-2"></div>
+          <div className="col-sm-8 text-center">
+            <p id="intro-text">A site for ATLiens to monitor water levels and weather for shooting the hooch</p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-2 col-md-4"></div>
+          <div className="col-sm-8 col-md-4">
             <Form
               handleInputChange={handleInputChange}
               handleSubmit={handleSubmit}

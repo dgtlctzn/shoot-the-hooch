@@ -18,3 +18,17 @@ body {
   margin-bottom: 30px;
 }
 
+#intro-text {
+  color: seashell;
+  text-shadow: 2px 2px 4px #000000;
+  font-size: 30px;
+}
+
+@media screen and (max-width: 400px) {
+  .title {
+    font-size: 75px;
+  }
+  #intro-text {
+    font-size: 20px;
+  }
+}

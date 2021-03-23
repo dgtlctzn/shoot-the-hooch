@@ -109,8 +109,6 @@ const Locations = () => {
 
         API.getWaterLevel(siteNo)
           .then((waterResponse) => {
-            console.log(waterResponse);
-
             const name = titleFormat(
               waterResponse.data.value.timeSeries[0].sourceInfo.siteName
             );
